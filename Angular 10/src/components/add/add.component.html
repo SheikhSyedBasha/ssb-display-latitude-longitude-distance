@@ -1,0 +1,73 @@
+<main>
+  <section>
+    <form #csForm="ngForm" [formGroup]="formGroup" (ngSubmit)="submit()">
+      <div layout="row" fxLayoutAlign="center center">
+        <mat-form-field class="form-field mat-form-field" appearance="fill">
+          <mat-label>LandMark Name</mat-label>
+          <input matInput #landMarkName type="text" maxlength="50" placeholder="LandMark Name" required type="text" (blur)="validateOnBlur(landMarkNameControlName)"
+            formControlName="{{landMarkNameControlName}}" />
+          <mat-error *ngIf="formGroup.controls[landMarkNameControlName].hasError('required')">This field is required.
+          </mat-error>
+          <mat-hint class="align-right">{{landMarkName?.value?.length}}/50</mat-hint>
+        </mat-form-field>
+      </div>
+      <div layout="row" fxLayoutAlign="center center">
+        <mat-form-field class="form-field" appearance="fill">
+          <mat-label>Address</mat-label>
+          <textarea matInput placeholder="Address" (blur)="validateOnBlur(addressControlName)" type="text" formControlName="{{addressControlName}}"></textarea>
+          <mat-error *ngIf="formGroup.controls[addressControlName].hasError('required')">This field is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div layout="row" fxLayoutAlign="center center">
+        <mat-form-field class="form-field" appearance="fill">
+          <mat-label>Latitude</mat-label>
+          <input matInput placeholder="Latitude" (blur)="validateOnBlur(latitudeControlName)" type="text" required type="text"
+            formControlName="{{latitudeControlName}}" />
+          <mat-error *ngIf="formGroup.controls[latitudeControlName].hasError('required')">This field is required.
+          </mat-error>
+          <mat-error *ngIf="formGroup.controls[latitudeControlName].hasError('decimalError')">This field should have decimal number format (xx.xxxxxx).
+          </mat-error>
+          <mat-error *ngIf="formGroup.controls[latitudeControlName].hasError('onlynumber')">This field accept only decimals.
+          </mat-error>
+          <mat-error *ngIf="formGroup.controls[latitudeControlName].hasError('zero')">This field should greater than zero.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div layout="row" fxLayoutAlign="center center">
+        <mat-form-field class="form-field" appearance="fill">
+          <mat-label>Longitude</mat-label>
+          <input matInput placeholder="Longitude" type="text" required type="text"
+            formControlName="{{longitudeControlName}}" (blur)="validateOnBlur(longitudeControlName)" />
+            <mat-error *ngIf="formGroup.controls[longitudeControlName].hasError('required')">This field is required.
+            </mat-error>
+            <mat-error *ngIf="formGroup.controls[longitudeControlName].hasError('decimalError')">This field should have decimal number format (xx.xxxxxx).
+            </mat-error>
+            <mat-error *ngIf="formGroup.controls[longitudeControlName].hasError('onlynumber')">This field accept only decimals.
+            </mat-error>
+            <mat-error *ngIf="formGroup.controls[longitudeControlName].hasError('zero')">This field should greater than zero.
+            </mat-error>
+        </mat-form-field>
+      </div>
+      <div layout="row" fxLayoutAlign="center center">
+        <mat-form-field class="form-field" appearance="fill">
+          <mat-label>Contact Number</mat-label>
+          <input matInput placeholder="Contact Number" (blur)="validateOnBlur(contactControlName)" maxlength="10" type="text" required type="text"
+            formControlName="{{contactControlName}}" />
+          <mat-error *ngIf="formGroup.controls[contactControlName].hasError('required')">This field is required.
+          </mat-error>
+          <mat-error *ngIf="formGroup.controls[contactControlName].hasError('onlynumber')">This field accept only integers.
+          </mat-error>
+          <mat-error *ngIf="formGroup.controls[contactControlName].hasError('zero')">This field should greater than zero.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div layout="row" fxLayoutAlign="center center">
+        <button mat-raised-button color="primary" type="submit" mat-raised-button class="btn btn-primary"
+          [disabled]="!formGroup.dirty || !formGroup.valid">Submit</button>
+        &nbsp; &nbsp;
+        <button mat-raised-button type="button" (click)="cancel()" class="btn btn-primary">Cancel</button>
+      </div>
+    </form>
+  </section>
+</main>

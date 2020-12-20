@@ -1,0 +1,35 @@
+<main>
+  <div class="div-button-heading">
+    <h3 class="heading-h3">List Of LandMarks</h3>
+    <button *ngIf="landMarkList && landMarkList.length" color="primary" class="button-add-benchmark" mat-raised-button (click)="routeAdd()">Add LandMark</button>
+  </div>
+  <div *ngIf="landMarkList && landMarkList.length">
+    <table mat-table #table [dataSource]="landMarkList" class="mat-elevation-z8">
+      <ng-container matColumnDef="landmarkName">
+        <th mat-header-cell *matHeaderCellDef>Landmark Name</th>
+        <td mat-cell *matCellDef="let element"> {{element.landmarkName}}</td>
+      </ng-container>
+      <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef>Address</th>
+        <td mat-cell *matCellDef="let element" [matTooltip]="(element.address?.length >= 15) ? element.address?.substring(0, 15) : element.address" [innerHTML]="getAddress(element.address)"></td>
+      </ng-container>
+
+      <ng-container matColumnDef="pointOrder">
+        <th mat-header-cell *matHeaderCellDef>Point Order</th>
+        <td mat-cell *matCellDef="let element"> {{element.pointOrder}}</td>
+      </ng-container>
+      <ng-container matColumnDef="distance">
+        <th mat-header-cell *matHeaderCellDef>Distance (m)</th>
+        <td mat-cell *matCellDef="let element"> {{element.distance}}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <section *ngIf="!landMarkList || landMarkList.length <= 0">
+    <h3>
+      No LandMarks
+    </h3>
+    <button color="primary" mat-raised-button (click)="routeAdd()">Add LandMark</button>
+  </section>
+</main>
